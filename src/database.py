@@ -10,6 +10,13 @@ def get_questions_and_answers():
     cur.execute('SELECT * FROM inputResponses')
     return cur.fetchall()
 
+def insert_ques_ans(question,answer):
+    con= create_connection()
+    cur=con.cursor()
+    query = "INSERT INTO inputResponses values('"+question+"','"+answer+"')"
+    cur.execute(query)
+    con.commit()
+
 def get_answers_from_memory(question):
     rows=get_questions_and_answers()
     answer= ""
