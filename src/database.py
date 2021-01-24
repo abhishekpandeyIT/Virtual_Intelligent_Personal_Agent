@@ -20,13 +20,10 @@ def insert_ques_ans(question,answer):
 def get_answers_from_memory(question):
     rows=get_questions_and_answers()
     answer= ""
-
     for row in rows:
         if row[0].lower() in question.lower():
             answer = row[1]
             break
     return answer
 
-print(get_answers_from_memory("What is Time"))
-
-get_questions_and_answers()
+insert_ques_ans('Check internet connection','Internet Status')
