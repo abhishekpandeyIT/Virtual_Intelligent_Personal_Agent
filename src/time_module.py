@@ -5,3 +5,7 @@ def get_time():
 
     current_time= now.strftime("%H Hours %M Minutes")
     return current_time
+
+def get_hours():
+    now = datetime.now()
+    return now.strftime("%H")

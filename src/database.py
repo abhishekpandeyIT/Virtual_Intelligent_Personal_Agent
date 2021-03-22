@@ -39,3 +39,17 @@ def update_name(new_name):
     query = "UPDATE memoryStatus SET status='"+new_name+"' WHERE name='assitantName'"
     cur.execute(query)
     con.commit()
+
+def update_last_seen(last_seen_date):
+    con= create_connection()
+    cur=con.cursor()
+    query = "UPDATE memoryStatus SET status='"+str(last_seen_date)+"' WHERE name='last_seen'"
+    cur.execute(query)
+    con.commit()
+
+def get_last_seen():
+    con= create_connection()
+    cur=con.cursor()
+    query = "SELECT status FROM memoryStatus WHERE name='last_seen'"
+    cur.execute(query)
+    return str(cur.fetchall()[0][0])

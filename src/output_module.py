@@ -1,5 +1,5 @@
-from assistantResume import name
+import assistantResume
 
 def output(o):
     # For command line input
-    print(name +": "+o+"\n")
+    print(assistantResume.name +": "+o+"\n")
