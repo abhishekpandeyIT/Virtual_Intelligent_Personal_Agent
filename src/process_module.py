@@ -1,8 +1,9 @@
 from output_module import output
 from time_module import get_time
 from input_module import take_input
-from database import get_answers_from_memory, insert_ques_ans
+from database import get_answers_from_memory, insert_ques_ans, update_name
 from internet_module import check_internet_connection, check_on_wikipedia
+import assistantResume
 
 def internet_accessbility():
     IP_address = check_internet_connection()
@@ -28,6 +29,16 @@ def process(query):
             return "Internet is connected"
         else:
             return "Internet is not connected"
+    
+    elif answer == 'change name':
+        output("Okay! What do you want to call me")
+        temp = take_input()
+        if temp == assistantResume.name:
+            return "Can't Change. Its my current Name!!!"
+        else:
+            update_name(temp)
+            assistantResume.name=temp
+            return "Congrats! Now you can call me"
 
 
     else:

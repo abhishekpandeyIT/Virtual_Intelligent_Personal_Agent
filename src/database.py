@@ -26,4 +26,16 @@ def get_answers_from_memory(question):
             break
     return answer
 
-insert_ques_ans('Check internet connection','Internet Status')
+def get_name():
+    con= create_connection()
+    cur=con.cursor()
+    query = "SELECT status FROM memoryStatus WHERE name='assitantName'"
+    cur.execute(query)
+    return cur.fetchall()[0][0]
+    
+def update_name(new_name):
+    con= create_connection()
+    cur=con.cursor()
+    query = "UPDATE memoryStatus SET status='"+new_name+"' WHERE name='assitantName'"
+    cur.execute(query)
+    con.commit()
