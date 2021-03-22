@@ -1,4 +1,4 @@
-from time_module import get_hours
+from time_module import get_hours, get_date
 from output_module import output
 from database import update_last_seen, get_last_seen
 from datetime import date
@@ -10,7 +10,7 @@ def greet():
 
 
     # Fetch Today's date and store it to database
-    todays_date=str(date.today())
+    todays_date=get_date()
     update_last_seen(todays_date)
 
     

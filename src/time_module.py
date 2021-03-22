@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 
 def get_time():
     now = datetime.now()
@@ -9,3 +9,8 @@ def get_time():
 def get_hours():
     now = datetime.now()
     return now.strftime("%H")
+
+def get_date():
+    return str(date.today())
+
+

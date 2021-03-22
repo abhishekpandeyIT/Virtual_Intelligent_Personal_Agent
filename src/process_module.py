@@ -1,5 +1,5 @@
 from output_module import output
-from time_module import get_time
+from time_module import get_time, get_date
 from input_module import take_input
 from database import get_answers_from_memory, insert_ques_ans, update_name
 from internet_module import check_internet_connection, check_on_wikipedia
@@ -16,11 +16,8 @@ def internet_accessbility():
 def process(query):
     answer = get_answers_from_memory(query)
 
-    if answer == "":
-        answer=check_on_wikipedia(query)
-        if answer !="":
-            return answer
-
+    
+        
     if answer == "get time details":
         return ("Current Time is "+ get_time())
 
@@ -29,6 +26,9 @@ def process(query):
             return "Internet is connected"
         else:
             return "Internet is not connected"
+    
+    elif answer == "tell_date":
+        return "Today's Date is: " + get_date()
     
     elif answer == 'change name':
         output("Okay! What do you want to call me")
@@ -42,17 +42,24 @@ def process(query):
 
 
     else:
-        output("I don't know this one, pls. tell me what it means?")
-        ans= take_input()
-        if "it means" in ans:
-            ans = ans.replace("it means", "")
-            ans= ans.strip()
-
-            value=get_answers_from_memory(ans)
-            if value== "":
-                return "can't help with this one"
-            else:
-                insert_ques_ans(query, value)
-                return "Thanks I will remember it for the next Time."
+        output("Don't know this one, should I search on Internet")
+        ans=take_input()
+        if "yes" in ans:
+            answer=check_on_wikipedia(query)
+            if answer !="":
+                return answer
         else:
-            return "can't help with this one"
+            output("Please tell me what it means?")
+            ans= take_input()
+            if "it means" in ans:
+                ans = ans.replace("it means", "")
+                ans= ans.strip()
+
+                value=get_answers_from_memory(ans)
+                if value== "":
+                    return "can't help with this one"
+                else:
+                    insert_ques_ans(query, value)
+                    return "Thanks I will remember it for the next Time."
+            else:
+                return "can't help with this one"
