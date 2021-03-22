@@ -1,17 +1,11 @@
 from output_module import output
 from time_module import get_time, get_date
 from input_module import take_input
-from database import get_answers_from_memory, insert_ques_ans, update_name
+from database import *
 from internet_module import check_internet_connection, check_on_wikipedia
 import assistantResume
-
-def internet_accessbility():
-    IP_address = check_internet_connection()
-
-    if IP_address =='127.0.0.1':
-        return False
-    else:
-        return True
+from web import *
+import os
 
 def process(query):
     answer = get_answers_from_memory(query)
@@ -22,13 +16,41 @@ def process(query):
         return ("Current Time is "+ get_time())
 
     elif answer == "Internet Status":
-        if internet_accessbility():
+        if check_internet_connection:
             return "Internet is connected"
         else:
             return "Internet is not connected"
     
     elif answer == "tell_date":
         return "Today's Date is: " + get_date()
+
+    elif answer == "on speak":
+        return turn_on_speech()
+    
+    elif answer == "off speak":
+        return turn_off_speech()
+
+    elif answer == "open facebook":
+        open_facebook()
+        return "Opening Facebook"
+
+    elif answer == "open instagram":
+        open_instagram()
+        return "Opening Instagram"
+
+    elif answer == "open google":
+        open_google()
+        return "Opening Google"
+
+    elif answer == "open browser":
+        open_browser()
+        return "Opening Browser"
+
+    elif answer == "open youtube":
+        open_youtube()
+        return "Opening Browser"
+
+
     
     elif answer == 'change name':
         output("Okay! What do you want to call me")

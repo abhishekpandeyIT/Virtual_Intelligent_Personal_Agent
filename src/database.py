@@ -1,4 +1,8 @@
 import sqlite3
+from internet_module import check_internet_connection
+
+
+
 def create_connection():
     connection= sqlite3.connect('Database/memory.db')
     return connection
@@ -53,3 +57,35 @@ def get_last_seen():
     query = "SELECT status FROM memoryStatus WHERE name='last_seen'"
     cur.execute(query)
     return str(cur.fetchall()[0][0])
+
+def turn_on_speech():
+    if(check_internet_connection()):
+        con= create_connection()
+        cur=con.cursor()
+        query = "UPDATE memoryStatus SET status='on' WHERE name='speech'"
+        cur.execute(query)
+        con.commit()
+        return "Auto-Speech is on"
+    else:
+        return "Hey, Please turn on Internet First!"
+
+
+def turn_off_speech():
+    con= create_connection()
+    cur=con.cursor()
+    query = "UPDATE memoryStatus SET status='off' WHERE name='speech'"
+    cur.execute(query)
+    con.commit()
+    return "Auto-Speech is off"
+
+def speak_is_on():
+    con= create_connection()
+    cur=con.cursor()
+    query = "SELECT status FROM memoryStatus WHERE name='speech'"
+    cur.execute(query)
+    ans= str(cur.fetchall()[0][0])
+
+    if ans=="on":
+        return True
+    else:
+        return False

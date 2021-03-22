@@ -2,7 +2,11 @@ import socket
 import wikipedia
 
 def check_internet_connection():
-    return socket.gethostbyname(socket.gethostname())
+    IP_address= socket.gethostbyname(socket.gethostname())
+    if IP_address =='127.0.0.1':
+        return False
+    else:
+        return True
     
 # print(check_internet_connection())
 
